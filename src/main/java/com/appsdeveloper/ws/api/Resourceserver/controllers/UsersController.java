@@ -15,6 +15,16 @@ public class UsersController {
     public String status() {
         return "Working";
     }
+
+    @PreAuthorize("#id == #jwt.subject")
+    @DeleteMapping(path = "/{id}")
+    public String deleteUser(@PathVariable String id, @AuthenticationPrincipal Jwt jwt) {
+        return "Deleted user with id " + id + " and JWT subject " + jwt.getSubject();
+    }
+
+
+
+
 /*
     @PreAuthorize("hasAuthority('ROLE_developer') or #id == #jwt.subject")
     //@Secured("ROLE_developer")
